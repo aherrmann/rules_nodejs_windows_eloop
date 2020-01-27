@@ -1,0 +1,16 @@
+load("@npm//eslint:index.bzl", "eslint_test")
+
+eslint_test(
+    name = "lint",
+    data = [
+        "@npm//@typescript-eslint",
+        "@npm//tsutils",
+        "index.ts",
+        "package.json",
+    ],
+    templated_args = [
+        "--config",
+        "$(rlocation $(location package.json))",
+        "$(rlocation $(location index.ts))",
+    ],
+)
