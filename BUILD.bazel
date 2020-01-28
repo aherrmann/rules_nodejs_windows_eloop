@@ -1,4 +1,5 @@
 load("@npm//eslint:index.bzl", "eslint_test")
+load("@npm//jest-cli:index.bzl", "jest_test")
 
 eslint_test(
     name = "lint",
@@ -12,5 +13,19 @@ eslint_test(
         "--config",
         "$(rlocation $(location package.json))",
         "$(rlocation $(location index.ts))",
+    ],
+)
+
+jest_test(
+    name = "test",
+    data = [
+        "index.test.ts",
+        "package.json",
+    ],
+    templated_args = [
+        "--config",
+        "$(rlocation $(location package.json))",
+        "--runTestsByPath",
+        "$(rlocation $(location index.test.ts))",
     ],
 )
